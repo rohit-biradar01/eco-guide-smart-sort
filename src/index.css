@@ -6,26 +6,26 @@
 
 @layer base {
   :root {
-    --background: 140 20% 98%;
-    --foreground: 150 30% 12%;
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 150 30% 12%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 150 30% 12%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 152 55% 38%;
+    --primary: 152 55% 32%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 42 60% 92%;
-    --secondary-foreground: 35 50% 25%;
+    --secondary: 210 18% 93%;
+    --secondary-foreground: 215 20% 30%;
 
-    --muted: 140 15% 94%;
-    --muted-foreground: 150 10% 45%;
+    --muted: 210 14% 95%;
+    --muted-foreground: 215 12% 50%;
 
-    --accent: 85 45% 88%;
-    --accent-foreground: 150 30% 12%;
+    --accent: 152 30% 92%;
+    --accent-foreground: 152 40% 20%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
@@ -33,60 +33,61 @@
     --warning: 38 92% 50%;
     --warning-foreground: 38 90% 15%;
 
-    --success: 152 60% 42%;
+    --success: 152 60% 36%;
     --success-foreground: 0 0% 100%;
 
     --earth: 28 40% 45%;
     --earth-foreground: 0 0% 100%;
 
-    --border: 140 15% 89%;
-    --input: 140 15% 89%;
-    --ring: 152 55% 38%;
-    --radius: 0.75rem;
+    --border: 214 18% 90%;
+    --input: 214 18% 90%;
+    --ring: 152 55% 32%;
+    --radius: 0.5rem;
 
-    --sidebar-background: 150 25% 14%;
-    --sidebar-foreground: 140 15% 90%;
-    --sidebar-primary: 152 55% 50%;
+    --sidebar-background: 215 28% 13%;
+    --sidebar-foreground: 210 15% 85%;
+    --sidebar-primary: 152 55% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 150 20% 20%;
-    --sidebar-accent-foreground: 140 15% 90%;
-    --sidebar-border: 150 15% 22%;
-    --sidebar-ring: 152 55% 50%;
+    --sidebar-accent: 215 22% 18%;
+    --sidebar-accent-foreground: 210 15% 90%;
+    --sidebar-border: 215 20% 20%;
+    --sidebar-ring: 152 55% 45%;
 
     --chart-green: 152 55% 38%;
     --chart-amber: 38 92% 50%;
     --chart-blue: 200 70% 50%;
     --chart-red: 0 72% 51%;
+    --chart-slate: 215 20% 65%;
   }
 
   .dark {
-    --background: 150 20% 6%;
-    --foreground: 140 15% 90%;
-    --card: 150 20% 9%;
-    --card-foreground: 140 15% 90%;
-    --popover: 150 20% 9%;
-    --popover-foreground: 140 15% 90%;
-    --primary: 152 55% 45%;
+    --background: 215 25% 7%;
+    --foreground: 210 15% 90%;
+    --card: 215 22% 10%;
+    --card-foreground: 210 15% 90%;
+    --popover: 215 22% 10%;
+    --popover-foreground: 210 15% 90%;
+    --primary: 152 55% 40%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 42 30% 18%;
-    --secondary-foreground: 42 60% 85%;
-    --muted: 150 15% 15%;
-    --muted-foreground: 140 10% 55%;
-    --accent: 85 25% 18%;
-    --accent-foreground: 85 45% 85%;
+    --secondary: 215 18% 18%;
+    --secondary-foreground: 210 15% 80%;
+    --muted: 215 15% 15%;
+    --muted-foreground: 210 10% 55%;
+    --accent: 152 20% 15%;
+    --accent-foreground: 152 30% 85%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
-    --border: 150 15% 18%;
-    --input: 150 15% 18%;
-    --ring: 152 55% 45%;
-    --sidebar-background: 150 25% 8%;
-    --sidebar-foreground: 140 15% 85%;
-    --sidebar-primary: 152 55% 50%;
+    --border: 215 15% 18%;
+    --input: 215 15% 18%;
+    --ring: 152 55% 40%;
+    --sidebar-background: 215 28% 8%;
+    --sidebar-foreground: 210 15% 85%;
+    --sidebar-primary: 152 55% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 150 20% 14%;
-    --sidebar-accent-foreground: 140 15% 85%;
-    --sidebar-border: 150 15% 15%;
-    --sidebar-ring: 152 55% 50%;
+    --sidebar-accent: 215 22% 14%;
+    --sidebar-accent-foreground: 210 15% 85%;
+    --sidebar-border: 215 15% 15%;
+    --sidebar-ring: 152 55% 45%;
   }
 }
 
@@ -100,10 +101,7 @@
 }
 
 @layer utilities {
-  .eco-gradient {
-    @apply bg-gradient-to-br from-primary/10 via-accent/30 to-secondary/20;
-  }
   .glass-card {
-    @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-sm;
+    @apply bg-card border border-border shadow-sm;
   }
 }
