@@ -3,8 +3,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import Layout from "@/components/Layout";
+import AIClassifier from "@/pages/AIClassifier";
+import CollectionSchedule from "@/pages/CollectionSchedule";
+import FacilityLocator from "@/pages/FacilityLocator";
+import BulkyPickup from "@/pages/BulkyPickup";
+import ReportDumping from "@/pages/ReportDumping";
+import Guides from "@/pages/Guides";
+import EWaste from "@/pages/EWaste";
+import WasteTracker from "@/pages/WasteTracker";
+import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -14,11 +22,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<AIClassifier />} />
+            <Route path="/schedule" element={<CollectionSchedule />} />
+            <Route path="/facilities" element={<FacilityLocator />} />
+            <Route path="/bulky-pickup" element={<BulkyPickup />} />
+            <Route path="/report" element={<ReportDumping />} />
+            <Route path="/guides" element={<Guides />} />
+            <Route path="/ewaste" element={<EWaste />} />
+            <Route path="/tracker" element={<WasteTracker />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Layout>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
