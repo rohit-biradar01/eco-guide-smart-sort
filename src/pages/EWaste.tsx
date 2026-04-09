@@ -60,7 +60,7 @@ export default function EWaste() {
             </div>
           </div>
         </DialogContent>
-      </Card>
+      </Dialog>
 
       <div className="space-y-2">
         <h2 className="font-semibold text-lg">Quick Reference — Step-by-Step</h2>
