@@ -7,11 +7,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { useCalendar } from "@/contexts/CalendarContext";
 
 const categories = ["Furniture", "Large Appliances", "Mattress / Bedding", "Electronics", "Construction Debris", "Other"];
 const timeSlots = ["8:00 AM – 10:00 AM", "10:00 AM – 12:00 PM", "1:00 PM – 3:00 PM", "3:00 PM – 5:00 PM"];
@@ -27,6 +27,7 @@ export default function BulkyPickup() {
   const [time, setTime] = useState("");
   const [notes, setNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const { addEvent } = useCalendar();
 
   const steps = ["Contact", "Item Details", "Schedule", "Confirm"];
 
@@ -40,26 +41,34 @@ export default function BulkyPickup() {
   const disableDate = (d: Date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return d < today || d.getDay() === 0; // past dates + Sundays
+    return d < today || d.getDay() === 0;
   };
 
   const handleSubmit = () => {
     setSubmitting(true);
     setTimeout(() => {
+      // Push to shared calendar state
+      if (date) {
+        addEvent({
+          date,
+          type: "Bulky Pickup",
+          label: `${category} — ${time}`,
+        });
+      }
       setSubmitting(false);
-      toast.success("Pickup request submitted successfully!");
+      toast.success("Pickup scheduled! Check your Collection Calendar to see it.");
       setStep(0); setName(""); setPhone(""); setAddress(""); setCategory(""); setItemDesc(""); setDate(undefined); setTime(""); setNotes("");
-    }, 1000);
+    }, 800);
   };
 
   return (
-    <div className="p-4 md:p-8 max-w-2xl mx-auto space-y-6">
+    <div className="p-4 md:p-8 max-w-2xl mx-auto space-y-6 animate-fade-in">
       <div className="space-y-1">
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Truck className="h-6 w-6 text-primary" />
+          <Truck className="h-6 w-6 text-purple" />
           Bulky Item Pickup
         </h1>
-        <p className="text-sm text-muted-foreground">Schedule a special collection for large items in 4 easy steps.</p>
+        <p className="text-sm text-muted-foreground">Schedule a special collection — it appears on your Collection Calendar automatically.</p>
       </div>
 
       {/* Stepper */}
@@ -67,8 +76,8 @@ export default function BulkyPickup() {
         {steps.map((s, i) => (
           <div key={s} className="flex items-center gap-1 flex-1">
             <div className={cn(
-              "flex items-center justify-center h-8 w-8 rounded-full text-xs font-bold transition-colors shrink-0",
-              i < step ? "bg-success text-success-foreground" : i === step ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+              "flex items-center justify-center h-8 w-8 rounded-full text-xs font-bold transition-all shrink-0",
+              i < step ? "bg-success text-success-foreground" : i === step ? "gradient-primary text-primary-foreground shadow-md" : "bg-muted text-muted-foreground"
             )}>
               {i < step ? <CheckCircle className="h-4 w-4" /> : i + 1}
             </div>
@@ -154,7 +163,7 @@ export default function BulkyPickup() {
 
           {step === 3 && (
             <div className="space-y-4">
-              <CardTitle className="text-sm flex items-center gap-2"><CheckCircle className="h-4 w-4 text-primary" /> Review & Submit</CardTitle>
+              <CardTitle className="text-sm flex items-center gap-2"><CheckCircle className="h-4 w-4 text-success" /> Review & Submit</CardTitle>
               <div className="grid gap-2 text-sm">
                 {[
                   ["Name", name],
@@ -164,17 +173,11 @@ export default function BulkyPickup() {
                   ["Date", date ? format(date, "PPP") : "—"],
                   ["Time", time],
                 ].map(([label, val]) => (
-                  <div key={label} className="flex justify-between items-center p-2.5 bg-muted/50 rounded">
+                  <div key={label} className="flex justify-between items-center p-2.5 bg-muted/50 rounded-lg">
                     <span className="text-muted-foreground text-xs">{label}</span>
                     <span className="font-medium text-xs">{val || "—"}</span>
                   </div>
                 ))}
-                {itemDesc && (
-                  <div className="p-2.5 bg-muted/50 rounded">
-                    <span className="text-muted-foreground text-xs block mb-1">Description</span>
-                    <span className="text-xs">{itemDesc}</span>
-                  </div>
-                )}
               </div>
             </div>
           )}
@@ -184,11 +187,11 @@ export default function BulkyPickup() {
               <ArrowLeft className="h-4 w-4 mr-1" /> Back
             </Button>
             {step < 3 ? (
-              <Button size="sm" onClick={() => setStep(s => s + 1)} disabled={!canProceed()}>
+              <Button size="sm" onClick={() => setStep(s => s + 1)} disabled={!canProceed()} className="gradient-primary text-primary-foreground">
                 Next <ArrowRight className="h-4 w-4 ml-1" />
               </Button>
             ) : (
-              <Button size="sm" onClick={handleSubmit} disabled={submitting}>
+              <Button size="sm" onClick={handleSubmit} disabled={submitting} className="gradient-primary text-primary-foreground">
                 {submitting ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <CheckCircle className="h-4 w-4 mr-1" />}
                 Submit Request
               </Button>
