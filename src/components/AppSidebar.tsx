@@ -1,5 +1,5 @@
 import {
-  Brain, Calendar, MapPin, Truck, AlertTriangle, BookOpen, Zap, BarChart3, Leaf, Recycle
+  Brain, Calendar, MapPin, Truck, AlertTriangle, BookOpen, Zap, BarChart3, Recycle
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -10,12 +10,12 @@ import {
 
 const navItems = [
   { title: "AI Classifier", url: "/", icon: Brain },
-  { title: "Collection Schedule", url: "/schedule", icon: Calendar },
   { title: "Facility Locator", url: "/facilities", icon: MapPin },
-  { title: "Bulky Pickup", url: "/bulky-pickup", icon: Truck },
+  { title: "Collection Schedule", url: "/schedule", icon: Calendar },
   { title: "Report Dumping", url: "/report", icon: AlertTriangle },
-  { title: "Bin Guide", url: "/guides", icon: BookOpen },
-  { title: "E-Waste Disposal", url: "/ewaste", icon: Zap },
+  { title: "Bulky Pickup", url: "/bulky-pickup", icon: Truck },
+  { title: "Knowledge Base", url: "/guides", icon: BookOpen },
+  { title: "E-Waste Guide", url: "/ewaste", icon: Zap },
   { title: "Waste Tracker", url: "/tracker", icon: BarChart3 },
 ];
 
@@ -26,22 +26,22 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="p-4">
-        <div className="flex items-center gap-2">
+      <SidebarHeader className="p-4 border-b border-sidebar-border">
+        <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sidebar-primary">
             <Recycle className="h-5 w-5 text-sidebar-primary-foreground" />
           </div>
           {!collapsed && (
             <div className="flex flex-col">
-              <span className="text-sm font-bold text-sidebar-foreground">EcoSort</span>
-              <span className="text-xs text-sidebar-foreground/60">Smart Waste Manager</span>
+              <span className="text-sm font-bold text-sidebar-foreground tracking-tight">EcoClean</span>
+              <span className="text-[10px] text-sidebar-foreground/50 uppercase tracking-widest">Waste Management</span>
             </div>
           )}
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider">Platform</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
@@ -58,12 +58,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-3 border-t border-sidebar-border">
         {!collapsed && (
-          <div className="flex items-center gap-2 text-xs text-sidebar-foreground/50">
-            <Leaf className="h-3 w-3" />
-            <span>Built for a greener planet</span>
-          </div>
+          <p className="text-[10px] text-sidebar-foreground/40 text-center">v1.0 — Hackathon Demo</p>
         )}
       </SidebarFooter>
     </Sidebar>
