@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { CalendarProvider } from "@/contexts/CalendarContext";
 import Layout from "@/components/Layout";
 import AIClassifier from "@/pages/AIClassifier";
 import CollectionSchedule from "@/pages/CollectionSchedule";
@@ -12,31 +14,45 @@ import ReportDumping from "@/pages/ReportDumping";
 import Guides from "@/pages/Guides";
 import EWaste from "@/pages/EWaste";
 import WasteTracker from "@/pages/WasteTracker";
+import Login from "@/pages/Login";
+import Signup from "@/pages/Signup";
+import Profile from "@/pages/Profile";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<AIClassifier />} />
-            <Route path="/schedule" element={<CollectionSchedule />} />
-            <Route path="/facilities" element={<FacilityLocator />} />
-            <Route path="/bulky-pickup" element={<BulkyPickup />} />
-            <Route path="/report" element={<ReportDumping />} />
-            <Route path="/guides" element={<Guides />} />
-            <Route path="/ewaste" element={<EWaste />} />
-            <Route path="/tracker" element={<WasteTracker />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
-    </TooltipProvider>
+    <AuthProvider>
+      <CalendarProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="*" element={
+                <Layout>
+                  <Routes>
+                    <Route path="/" element={<AIClassifier />} />
+                    <Route path="/schedule" element={<CollectionSchedule />} />
+                    <Route path="/facilities" element={<FacilityLocator />} />
+                    <Route path="/bulky-pickup" element={<BulkyPickup />} />
+                    <Route path="/report" element={<ReportDumping />} />
+                    <Route path="/guides" element={<Guides />} />
+                    <Route path="/ewaste" element={<EWaste />} />
+                    <Route path="/tracker" element={<WasteTracker />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Layout>
+              } />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </CalendarProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 
