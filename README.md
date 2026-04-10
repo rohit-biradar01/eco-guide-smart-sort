@@ -94,6 +94,9 @@ We’d love to connect! Feel free to reach out to any of us on LinkedIn:
 - 👤 **Sarthak Tilekar**
   🔗 https://www.linkedin.com/in/sarthak-tilekar-8766a4334
 
+- 👤 **Aryan Kumawat**  
+  🔗 https://www.linkedin.com/in/aryan-kumawat-220950380
+
 - 👤 **Teammate Name**  
   🔗 https://www.linkedin.com/in/teammate-profile
 ---
