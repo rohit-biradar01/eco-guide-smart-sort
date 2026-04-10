@@ -88,6 +88,9 @@ We’d love to connect! Feel free to reach out to any of us on LinkedIn:
 - 👤 **Varad Patil**  
   🔗 https://www.linkedin.com/in/varad-patil-1442a0329
 
+- 👤 **Sharmee Das**  
+  🔗 https://www.linkedin.com/in/sharmee-das-b18627331/
+
 - 👤 **Sarthak Tilekar**
   🔗 https://www.linkedin.com/in/sarthak-tilekar-8766a4334
 
