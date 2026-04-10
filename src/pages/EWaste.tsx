@@ -62,14 +62,11 @@ export default function EWaste() {
             </DialogTitle>
           </DialogHeader>
           <div className="flex-1 min-h-0 border rounded-lg overflow-hidden bg-muted/30">
-            {/* TODO: Set your PDF URL as iframe src */}
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center space-y-3">
-                <FileText className="h-14 w-14 text-destructive/30 mx-auto" />
-                <p className="text-sm font-medium text-muted-foreground">PDF Viewer Ready</p>
-                <p className="text-xs text-muted-foreground/60">Set your hazardous disposal PDF URL here</p>
-              </div>
-            </div>
+            <iframe
+              src="/EWaste_Hazardous_Disposal_Guide.pdf"
+              title="E-Waste & Hazardous Disposal Guide"
+              className="w-full h-full border-0"
+            />
           </div>
         </DialogContent>
       </Dialog>
