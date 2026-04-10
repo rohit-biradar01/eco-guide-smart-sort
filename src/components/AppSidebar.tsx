@@ -12,15 +12,15 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 const navItems = [
-  { title: "AI Classifier", url: "/", icon: Brain },
-  { title: "Facility Locator", url: "/facilities", icon: MapPin },
-  { title: "Collection Schedule", url: "/schedule", icon: Calendar },
-  { title: "Report Dumping", url: "/report", icon: AlertTriangle },
-  { title: "Bulky Pickup", url: "/bulky-pickup", icon: Truck },
-  { title: "Knowledge Base", url: "/guides", icon: BookOpen },
-  { title: "E-Waste Guide", url: "/ewaste", icon: Zap },
-  { title: "Waste Tracker", url: "/tracker", icon: BarChart3 },
-  { title: "Scrap Rate", url: "/scrap-estimation", icon: IndianRupee },
+  { title: "AI Classifier", url: "/", icon: Brain, color: "text-eco-green" },
+  { title: "Facility Locator", url: "/facilities", icon: MapPin, color: "text-eco-blue" },
+  { title: "Collection Schedule", url: "/schedule", icon: Calendar, color: "text-eco-blue" },
+  { title: "Report Dumping", url: "/report", icon: AlertTriangle, color: "text-eco-red" },
+  { title: "Bulky Pickup", url: "/bulky-pickup", icon: Truck, color: "text-purple" },
+  { title: "Knowledge Base", url: "/guides", icon: BookOpen, color: "text-eco-green" },
+  { title: "E-Waste Guide", url: "/ewaste", icon: Zap, color: "text-eco-yellow" },
+  { title: "Waste Tracker", url: "/tracker", icon: BarChart3, color: "text-eco-blue" },
+  { title: "Scrap Rate", url: "/scrap-estimation", icon: IndianRupee, color: "text-eco-yellow" },
 ];
 
 export function AppSidebar() {
@@ -45,7 +45,7 @@ export function AppSidebar() {
           </div>
           {!collapsed && (
             <div className="flex flex-col">
-              <span className="text-sm font-bold text-sidebar-foreground tracking-tight">EcoClean</span>
+              <span className="text-sm font-bold font-heading text-sidebar-foreground tracking-tight">EcoClean</span>
               <span className="text-[10px] text-sidebar-foreground/50 uppercase tracking-widest">Smart Waste</span>
             </div>
           )}
@@ -53,14 +53,14 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider">Platform</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider font-heading">Platform</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={location.pathname === item.url}>
                     <NavLink to={item.url} end className="hover:bg-sidebar-accent/50" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
-                      <item.icon className="mr-2 h-4 w-4" />
+                      <item.icon className={`mr-2 h-4 w-4 ${item.color}`} />
                       {!collapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
@@ -71,7 +71,7 @@ export function AppSidebar() {
         </SidebarGroup>
         {isAuthenticated && (
           <SidebarGroup>
-            <SidebarGroupLabel className="text-[10px] uppercase tracking-wider">Account</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-[10px] uppercase tracking-wider font-heading">Account</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
@@ -94,7 +94,7 @@ export function AppSidebar() {
           </Button>
         )}
         {!collapsed && (
-          <p className="text-[10px] text-sidebar-foreground/30 text-center mt-1">v1.0 — Hackathon Demo</p>
+          <p className="text-[10px] text-sidebar-foreground/30 text-center mt-1">v2.0 — EcoClean</p>
         )}
       </SidebarFooter>
     </Sidebar>

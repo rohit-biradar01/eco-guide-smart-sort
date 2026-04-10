@@ -11,6 +11,10 @@ export default {
       screens: { "2xl": "1400px" },
     },
     extend: {
+      fontFamily: {
+        heading: ["Outfit", "sans-serif"],
+        body: ["Inter", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -64,6 +68,22 @@ export default {
         purple: {
           DEFAULT: "hsl(var(--purple))",
           foreground: "hsl(var(--purple-foreground))",
+        },
+        "eco-blue": {
+          DEFAULT: "hsl(var(--eco-blue))",
+          foreground: "hsl(var(--eco-blue-foreground))",
+        },
+        "eco-yellow": {
+          DEFAULT: "hsl(var(--eco-yellow))",
+          foreground: "hsl(var(--eco-yellow-foreground))",
+        },
+        "eco-red": {
+          DEFAULT: "hsl(var(--eco-red))",
+          foreground: "hsl(var(--eco-red-foreground))",
+        },
+        "eco-green": {
+          DEFAULT: "hsl(var(--eco-green))",
+          foreground: "hsl(var(--eco-green-foreground))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

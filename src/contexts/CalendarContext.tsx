@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useCallback, type ReactNode } from
 export interface CalendarEvent {
   id: string;
   date: Date;
-  type: "General" | "Recyclable" | "Green Waste" | "Bulky Pickup";
+  type: "General" | "Recyclable" | "Green Waste" | "Bulky Pickup" | "Dumping Report";
   label: string;
   shifted?: boolean;
   shiftReason?: string;

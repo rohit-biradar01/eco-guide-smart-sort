@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useCalendar } from "@/contexts/CalendarContext";
 
-const categories = ["Furniture", "Large Appliances", "Mattress / Bedding", "Electronics", "Construction Debris", "Other"];
+const categories = ["Glass", "Plastic", "Electronics", "Wood", "Fabrics", "Other"];
 const timeSlots = ["8:00 AM – 10:00 AM", "10:00 AM – 12:00 PM", "1:00 PM – 3:00 PM", "3:00 PM – 5:00 PM"];
 
 export default function BulkyPickup() {
@@ -47,7 +47,6 @@ export default function BulkyPickup() {
   const handleSubmit = () => {
     setSubmitting(true);
     setTimeout(() => {
-      // Push to shared calendar state
       if (date) {
         addEvent({
           date,
@@ -64,7 +63,7 @@ export default function BulkyPickup() {
   return (
     <div className="p-4 md:p-8 max-w-2xl mx-auto space-y-6 animate-fade-in">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
+        <h1 className="text-2xl font-bold font-heading flex items-center gap-2">
           <Truck className="h-6 w-6 text-purple" />
           Bulky Item Pickup
         </h1>
@@ -77,7 +76,7 @@ export default function BulkyPickup() {
           <div key={s} className="flex items-center gap-1 flex-1">
             <div className={cn(
               "flex items-center justify-center h-8 w-8 rounded-full text-xs font-bold transition-all shrink-0",
-              i < step ? "bg-success text-success-foreground" : i === step ? "gradient-primary text-primary-foreground shadow-md" : "bg-muted text-muted-foreground"
+              i < step ? "bg-eco-green text-eco-green-foreground" : i === step ? "gradient-primary text-primary-foreground shadow-md" : "bg-muted text-muted-foreground"
             )}>
               {i < step ? <CheckCircle className="h-4 w-4" /> : i + 1}
             </div>
@@ -91,7 +90,7 @@ export default function BulkyPickup() {
         <CardContent className="p-6 space-y-4">
           {step === 0 && (
             <div className="space-y-4">
-              <CardTitle className="text-sm flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> Contact & Address</CardTitle>
+              <CardTitle className="text-sm font-heading flex items-center gap-2"><MapPin className="h-4 w-4 text-eco-blue" /> Contact & Address</CardTitle>
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <Label className="text-xs">Full Name *</Label>
@@ -115,7 +114,7 @@ export default function BulkyPickup() {
 
           {step === 1 && (
             <div className="space-y-4">
-              <CardTitle className="text-sm flex items-center gap-2"><Package className="h-4 w-4 text-primary" /> Item Details</CardTitle>
+              <CardTitle className="text-sm font-heading flex items-center gap-2"><Package className="h-4 w-4 text-eco-yellow" /> Item Details</CardTitle>
               <div className="space-y-1">
                 <Label className="text-xs">Category *</Label>
                 <Select value={category} onValueChange={setCategory}>
@@ -134,7 +133,7 @@ export default function BulkyPickup() {
 
           {step === 2 && (
             <div className="space-y-4">
-              <CardTitle className="text-sm flex items-center gap-2"><CalendarIcon className="h-4 w-4 text-primary" /> Select Date & Time</CardTitle>
+              <CardTitle className="text-sm font-heading flex items-center gap-2"><CalendarIcon className="h-4 w-4 text-eco-green" /> Select Date & Time</CardTitle>
               <div className="space-y-1">
                 <Label className="text-xs">Pickup Date * (Sundays unavailable)</Label>
                 <Popover>
@@ -163,7 +162,7 @@ export default function BulkyPickup() {
 
           {step === 3 && (
             <div className="space-y-4">
-              <CardTitle className="text-sm flex items-center gap-2"><CheckCircle className="h-4 w-4 text-success" /> Review & Submit</CardTitle>
+              <CardTitle className="text-sm font-heading flex items-center gap-2"><CheckCircle className="h-4 w-4 text-eco-green" /> Review & Submit</CardTitle>
               <div className="grid gap-2 text-sm">
                 {[
                   ["Name", name],
