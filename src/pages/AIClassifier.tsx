@@ -128,8 +128,8 @@ export default function AIClassifier() {
   return (
     <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-6 animate-fade-in">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Brain className="h-6 w-6 text-primary" />
+        <h1 className="text-2xl font-bold font-heading flex items-center gap-2">
+          <Brain className="h-6 w-6 text-eco-green" />
           AI Waste Classifier
         </h1>
         <p className="text-sm text-muted-foreground">Identify waste types using AI. Search by name or upload a photo for instant classification.</p>

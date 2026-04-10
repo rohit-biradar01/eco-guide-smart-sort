@@ -29,8 +29,8 @@ export default function EWaste() {
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Zap className="h-6 w-6 text-warning" />
+        <h1 className="text-2xl font-bold font-heading flex items-center gap-2">
+          <Zap className="h-6 w-6 text-eco-yellow" />
           E-Waste & Hazardous Disposal
         </h1>
         <p className="text-sm text-muted-foreground">Step-by-step instructions for safe disposal of electronics and hazardous materials.</p>
