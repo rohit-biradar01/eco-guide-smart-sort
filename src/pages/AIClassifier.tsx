@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-import { Brain, Upload, Search, Sparkles, ExternalLink, X, ImageIcon, Loader2, Recycle, Trash2, Leaf, AlertTriangle, Cpu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Brain, Upload, Search, Sparkles, ExternalLink, X, ImageIcon, Loader2, Recycle, Trash2, Leaf, AlertTriangle, Cpu, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
