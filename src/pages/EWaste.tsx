@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Zap, AlertTriangle, FileText, Shield, ChevronRight, Search } from "lucide-react";
+import { Zap, AlertTriangle, Shield, ChevronRight, Search } from "lucide-react";
+import PdfViewer from "@/components/PdfViewer";
 import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -61,19 +62,8 @@ export default function EWaste() {
               <Shield className="h-4 w-4 text-destructive" /> E-Waste & Hazardous Disposal PDF
             </DialogTitle>
           </DialogHeader>
-          <div className="flex-1 min-h-0 border rounded-lg overflow-hidden bg-muted/30">
-            <object
-              data="/EWaste_Hazardous_Disposal_Guide.pdf"
-              type="application/pdf"
-              className="w-full h-full"
-            >
-              <p className="p-8 text-center text-muted-foreground">
-                Unable to display PDF.{" "}
-                <a href="/EWaste_Hazardous_Disposal_Guide.pdf" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-                  Download it here
-                </a>.
-              </p>
-            </object>
+          <div className="flex-1 min-h-0 border rounded-lg overflow-hidden">
+            <PdfViewer file="/EWaste_Hazardous_Disposal_Guide.pdf" className="h-full" />
           </div>
         </DialogContent>
       </Dialog>

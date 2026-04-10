@@ -1,5 +1,6 @@
 import { BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import PdfViewer from "@/components/PdfViewer";
 
 export default function Guides() {
   return (
@@ -17,18 +18,7 @@ export default function Guides() {
       <Card className="glass-card overflow-hidden" id="pdf-viewer">
         <CardContent className="p-0">
           <div className="relative w-full" style={{ height: "75vh", minHeight: 500 }}>
-            <object
-              data="/Waste_Classification_Guide.pdf"
-              type="application/pdf"
-              className="w-full h-full"
-            >
-              <p className="p-8 text-center text-muted-foreground">
-                Unable to display PDF.{" "}
-                <a href="/Waste_Classification_Guide.pdf" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-                  Download it here
-                </a>.
-              </p>
-            </object>
+            <PdfViewer file="/Waste_Classification_Guide.pdf" className="h-full" />
           </div>
         </CardContent>
       </Card>
