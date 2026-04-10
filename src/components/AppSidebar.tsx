@@ -1,5 +1,5 @@
 import {
-  Brain, Calendar, MapPin, Truck, AlertTriangle, BookOpen, Zap, BarChart3, Recycle, User, LogOut
+  Brain, Calendar, MapPin, Truck, AlertTriangle, BookOpen, Zap, BarChart3, Recycle, User, LogOut, IndianRupee
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ const navItems = [
   { title: "Knowledge Base", url: "/guides", icon: BookOpen },
   { title: "E-Waste Guide", url: "/ewaste", icon: Zap },
   { title: "Waste Tracker", url: "/tracker", icon: BarChart3 },
+  { title: "Scrap Rate", url: "/scrap-estimation", icon: IndianRupee },
 ];
 
 export function AppSidebar() {

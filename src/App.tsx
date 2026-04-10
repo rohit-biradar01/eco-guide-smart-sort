@@ -7,6 +7,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { CalendarProvider } from "@/contexts/CalendarContext";
 import Layout from "@/components/Layout";
 import AIClassifier from "@/pages/AIClassifier";
+import ScrapEstimation from "@/pages/ScrapEstimation";
 import CollectionSchedule from "@/pages/CollectionSchedule";
 import FacilityLocator from "@/pages/FacilityLocator";
 import BulkyPickup from "@/pages/BulkyPickup";
@@ -43,6 +44,7 @@ const App = () => (
                     <Route path="/guides" element={<Guides />} />
                     <Route path="/ewaste" element={<EWaste />} />
                     <Route path="/tracker" element={<WasteTracker />} />
+                    <Route path="/scrap-estimation" element={<ScrapEstimation />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>

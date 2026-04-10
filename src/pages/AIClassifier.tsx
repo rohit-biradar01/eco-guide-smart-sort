@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-import { Brain, Upload, Search, Sparkles, ExternalLink, X, ImageIcon, Loader2, Recycle, Trash2, Leaf, AlertTriangle, Cpu } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Brain, Upload, Search, Sparkles, ExternalLink, X, ImageIcon, Loader2, Recycle, Trash2, Leaf, AlertTriangle, Cpu, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -54,6 +55,7 @@ const binColorStyles: Record<string, { bg: string; border: string; badge: string
 };
 
 export default function AIClassifier() {
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -241,6 +243,25 @@ export default function AIClassifier() {
               </span>
             </div>
             <p className="text-sm text-foreground/80">{result.instructions}</p>
+            <div className="pt-2">
+              {result.category === "E-Waste" ? (
+                <Button
+                  size="sm"
+                  className="gradient-primary text-primary-foreground"
+                  onClick={() => navigate("/ewaste")}
+                >
+                  View E-Waste Guide <ArrowRight className="h-4 w-4 ml-1" />
+                </Button>
+              ) : (
+                <Button
+                  size="sm"
+                  className="gradient-primary text-primary-foreground"
+                  onClick={() => navigate("/guides#pdf-viewer")}
+                >
+                  Learn More in Knowledge Base <ArrowRight className="h-4 w-4 ml-1" />
+                </Button>
+              )}
+            </div>
           </CardContent>
         </Card>
       )}
