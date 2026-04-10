@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Zap, AlertTriangle, Shield, ChevronRight, Search } from "lucide-react";
+import { Zap, AlertTriangle, Shield, ChevronRight, ChevronDown, Search } from "lucide-react";
 import PdfViewer from "@/components/PdfViewer";
 import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const ewasteItems = [
@@ -37,7 +36,7 @@ export default function EWaste() {
         <p className="text-sm text-muted-foreground">Step-by-step instructions for safe disposal of electronics and hazardous materials.</p>
       </div>
 
-      <Card className="border-destructive/20 bg-destructive/5 hover:shadow-md transition-shadow cursor-pointer group" onClick={() => setPdfOpen(true)}>
+      <Card className="border-destructive/20 bg-destructive/5 hover:shadow-md transition-shadow cursor-pointer group" onClick={() => setPdfOpen(!pdfOpen)}>
         <CardContent className="p-5 flex items-center gap-5">
           <div className="h-16 w-16 rounded-lg bg-destructive/10 flex items-center justify-center group-hover:bg-destructive/20 transition-colors shrink-0">
             <Shield className="h-8 w-8 text-destructive" />
@@ -49,25 +48,23 @@ export default function EWaste() {
                 <AlertTriangle className="h-3 w-3 mr-1" /> Hazardous
               </Badge>
             </CardTitle>
-            <CardDescription className="text-xs">Complete safety guide — Open in full-screen viewer</CardDescription>
-            <span className="text-xs text-primary flex items-center gap-1 font-medium">Open PDF <ChevronRight className="h-3 w-3" /></span>
+            <CardDescription className="text-xs">Complete safety guide — {pdfOpen ? "Click to collapse" : "Click to view"}</CardDescription>
+            <span className="text-xs text-primary flex items-center gap-1 font-medium">
+              {pdfOpen ? "Hide" : "Open"} PDF {pdfOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+            </span>
           </div>
         </CardContent>
       </Card>
 
-      <Dialog open={pdfOpen} onOpenChange={setPdfOpen}>
-        <DialogContent className="max-w-5xl h-[85vh] flex flex-col">
-          <DialogHeader className="shrink-0">
-            <DialogTitle className="flex items-center gap-2 text-sm">
-              <Shield className="h-4 w-4 text-destructive" /> E-Waste & Hazardous Disposal PDF
-            </DialogTitle>
-          </DialogHeader>
-          <div className="flex-1 min-h-0 border rounded-lg overflow-hidden">
-            <PdfViewer file="/EWaste_Hazardous_Disposal_Guide.pdf" className="h-full" />
-          </div>
-        </DialogContent>
-      </Dialog>
-
+      {pdfOpen && (
+        <Card className="glass-card overflow-hidden">
+          <CardContent className="p-0">
+            <div className="relative w-full" style={{ height: "75vh", minHeight: 500 }}>
+              <PdfViewer file="/EWaste_Hazardous_Disposal_Guide.pdf" className="h-full" />
+            </div>
+          </CardContent>
+        </Card>
+      )}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-base">Quick Reference</h2>
