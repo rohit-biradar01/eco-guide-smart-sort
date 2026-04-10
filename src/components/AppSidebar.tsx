@@ -45,7 +45,7 @@ export function AppSidebar() {
           </div>
           {!collapsed && (
             <div className="flex flex-col">
-              <span className="text-sm font-bold font-heading text-sidebar-foreground tracking-tight">EcoClean</span>
+              <span className="text-sm font-bold font-heading text-sidebar-foreground tracking-tight">Project Eco</span>
               <span className="text-[10px] text-sidebar-foreground/50 uppercase tracking-widest">Smart Waste</span>
             </div>
           )}
@@ -94,7 +94,7 @@ export function AppSidebar() {
           </Button>
         )}
         {!collapsed && (
-          <p className="text-[10px] text-sidebar-foreground/30 text-center mt-1">v2.0 — EcoClean</p>
+          <p className="text-[10px] text-sidebar-foreground/30 text-center mt-1">v2.0 — Project Eco</p>
         )}
       </SidebarFooter>
     </Sidebar>
