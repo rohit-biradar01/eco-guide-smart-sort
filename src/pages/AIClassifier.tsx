@@ -1,16 +1,57 @@
 import { useState, useRef } from "react";
-import { Brain, Upload, Search, Sparkles, ExternalLink, X, ImageIcon } from "lucide-react";
+import { Brain, Upload, Search, Sparkles, ExternalLink, X, ImageIcon, Loader2, Recycle, Trash2, Leaf, AlertTriangle, Cpu } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 // ====================================================================
 // HUGGING FACE SPACE URL — Replace with your deployed Space endpoint
 // ====================================================================
 const HF_SPACE_URL = "about:blank";
+
+interface ClassificationResult {
+  item: string;
+  category: string;
+  bin_color: string;
+  instructions: string;
+}
+
+const binColorStyles: Record<string, { bg: string; border: string; badge: string; icon: React.ReactNode }> = {
+  Blue: {
+    bg: "bg-blue-50 dark:bg-blue-950/30",
+    border: "border-blue-400 dark:border-blue-500",
+    badge: "bg-blue-500 text-white",
+    icon: <Recycle className="h-5 w-5 text-blue-500" />,
+  },
+  Black: {
+    bg: "bg-gray-50 dark:bg-gray-900/30",
+    border: "border-gray-500 dark:border-gray-400",
+    badge: "bg-gray-700 text-white",
+    icon: <Trash2 className="h-5 w-5 text-gray-500" />,
+  },
+  Green: {
+    bg: "bg-emerald-50 dark:bg-emerald-950/30",
+    border: "border-emerald-400 dark:border-emerald-500",
+    badge: "bg-emerald-500 text-white",
+    icon: <Leaf className="h-5 w-5 text-emerald-500" />,
+  },
+  Red: {
+    bg: "bg-red-50 dark:bg-red-950/30",
+    border: "border-red-400 dark:border-red-500",
+    badge: "bg-red-500 text-white",
+    icon: <AlertTriangle className="h-5 w-5 text-red-500" />,
+  },
+  Orange: {
+    bg: "bg-orange-50 dark:bg-orange-950/30",
+    border: "border-orange-400 dark:border-orange-500",
+    badge: "bg-orange-500 text-white",
+    icon: <Cpu className="h-5 w-5 text-orange-500" />,
+  },
+};
 
 export default function AIClassifier() {
   const [query, setQuery] = useState("");
@@ -18,20 +59,37 @@ export default function AIClassifier() {
   const [preview, setPreview] = useState<string | null>(null);
   const [isClassifying, setIsClassifying] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [result, setResult] = useState<ClassificationResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const handleClassify = () => {
-    if (!query.trim()) {
+  const handleClassify = async () => {
+    const trimmed = query.trim();
+    if (!trimmed) {
       toast.error("Please enter an item name to classify.");
       return;
     }
     setIsClassifying(true);
-    toast.info(`Classifying "${query}"...`);
-    // TODO: Wire to Hugging Face Inference API
-    setTimeout(() => {
+    setResult(null);
+    setError(null);
+
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke("classify-waste", {
+        body: { item: trimmed },
+      });
+
+      if (fnError) throw fnError;
+      if (data?.error) throw new Error(data.error);
+
+      setResult(data as ClassificationResult);
+      toast.success(`"${data.item}" classified as ${data.category}!`);
+    } catch (e: any) {
+      const msg = e?.message || "Unable to classify this item right now. Please try again.";
+      setError(msg);
+      toast.error(msg);
+    } finally {
       setIsClassifying(false);
-      toast.success("Classification ready — connect your Hugging Face API to see real results.");
-    }, 1500);
+    }
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +121,8 @@ export default function AIClassifier() {
     }, 2000);
   };
 
+  const style = result ? binColorStyles[result.bin_color] || binColorStyles["Black"] : null;
+
   return (
     <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-6 animate-fade-in">
       <div className="space-y-1">
@@ -84,13 +144,17 @@ export default function AIClassifier() {
           <CardContent>
             <div className="flex gap-2">
               <Input
-                placeholder="e.g. plastic bottle, banana peel..."
+                placeholder="What do you need to throw away?"
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 onKeyDown={e => e.key === "Enter" && handleClassify()}
               />
               <Button size="sm" onClick={handleClassify} disabled={isClassifying} className="gradient-primary text-primary-foreground">
-                <Sparkles className="h-4 w-4 mr-1" /> Classify
+                {isClassifying ? (
+                  <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Classifying...</>
+                ) : (
+                  <><Sparkles className="h-4 w-4 mr-1" /> Classify</>
+                )}
               </Button>
             </div>
           </CardContent>
@@ -126,13 +190,9 @@ export default function AIClassifier() {
               className="w-full gradient-primary text-primary-foreground"
             >
               {isAnalyzing ? (
-                <>
-                  <Sparkles className="h-4 w-4 mr-2 animate-spin" /> Analyzing...
-                </>
+                <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Analyzing...</>
               ) : (
-                <>
-                  <Sparkles className="h-4 w-4 mr-2" /> Analyze Image
-                </>
+                <><Sparkles className="h-4 w-4 mr-2" /> Analyze Image</>
               )}
             </Button>
             {isAnalyzing && (
@@ -145,6 +205,45 @@ export default function AIClassifier() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Classification Result Card */}
+      {isClassifying && (
+        <Card className="glass-card">
+          <CardContent className="p-6 space-y-3">
+            <Skeleton className="h-6 w-1/3" />
+            <Skeleton className="h-8 w-1/4" />
+            <Skeleton className="h-4 w-2/3" />
+          </CardContent>
+        </Card>
+      )}
+
+      {error && !isClassifying && (
+        <Card className="border-destructive/50 bg-destructive/5">
+          <CardContent className="p-6">
+            <p className="text-sm text-destructive font-medium">{error}</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {result && !isClassifying && style && (
+        <Card className={`${style.bg} ${style.border} border-2 transition-all animate-fade-in`}>
+          <CardContent className="p-6 space-y-4">
+            <div className="flex items-center gap-3">
+              {style.icon}
+              <h2 className="text-xl font-bold text-foreground">{result.item}</h2>
+            </div>
+            <div>
+              <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${style.badge}`}>
+                {result.category}
+              </span>
+              <span className="ml-2 text-xs text-muted-foreground">
+                {result.bin_color} Bin
+              </span>
+            </div>
+            <p className="text-sm text-foreground/80">{result.instructions}</p>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Hugging Face Space iframe bridge */}
       <Card className="glass-card overflow-hidden">
