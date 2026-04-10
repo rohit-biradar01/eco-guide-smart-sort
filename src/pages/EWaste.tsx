@@ -62,11 +62,18 @@ export default function EWaste() {
             </DialogTitle>
           </DialogHeader>
           <div className="flex-1 min-h-0 border rounded-lg overflow-hidden bg-muted/30">
-            <iframe
-              src="/EWaste_Hazardous_Disposal_Guide.pdf"
-              title="E-Waste & Hazardous Disposal Guide"
-              className="w-full h-full border-0"
-            />
+            <object
+              data="/EWaste_Hazardous_Disposal_Guide.pdf"
+              type="application/pdf"
+              className="w-full h-full"
+            >
+              <p className="p-8 text-center text-muted-foreground">
+                Unable to display PDF.{" "}
+                <a href="/EWaste_Hazardous_Disposal_Guide.pdf" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                  Download it here
+                </a>.
+              </p>
+            </object>
           </div>
         </DialogContent>
       </Dialog>
