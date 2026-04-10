@@ -43,8 +43,8 @@ export default function Signup() {
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background via-background to-muted">
       <Card className="w-full max-w-md shadow-xl border-0">
         <CardHeader className="text-center space-y-3 pb-2">
-          <div className="mx-auto h-14 w-14 rounded-2xl gradient-primary flex items-center justify-center shadow-lg">
-            <Recycle className="h-7 w-7 text-primary-foreground" />
+          <div className="mx-auto h-14 w-14 rounded-2xl bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/40">
+            <Recycle className="h-7 w-7 text-white" />
           </div>
           <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
           <CardDescription>Join EcoClean and start managing waste smarter</CardDescription>

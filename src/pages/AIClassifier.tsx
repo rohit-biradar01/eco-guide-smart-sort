@@ -12,7 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 // ====================================================================
 // HUGGING FACE SPACE URL — Replace with your deployed Space endpoint
 // ====================================================================
-const HF_SPACE_URL = "about:blank";
+const HF_SPACE_URL = "https://rohiie-waste-classifying.hf.space";
 
 interface ClassificationResult {
   item: string;
