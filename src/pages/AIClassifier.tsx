@@ -272,11 +272,11 @@ export default function AIClassifier() {
           <div className="flex items-center justify-between">
             <CardTitle className="text-sm">ML Model — Hugging Face Space</CardTitle>
             <Badge variant="secondary" className="text-xs bg-accent/15 text-accent">
-              <ExternalLink className="h-3 w-3 mr-1" /> Bridge
+              <ExternalLink className="h-3 w-3 mr-1" /> Live
             </Badge>
           </div>
           <CardDescription className="text-xs">
-            Replace <code className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono">HF_SPACE_URL</code> at the top of this file with your deployed Space URL.
+            Waste classification powered by your deployed Hugging Face model.
           </CardDescription>
         </CardHeader>
         <CardContent className="p-0">
@@ -287,17 +287,6 @@ export default function AIClassifier() {
               title="Hugging Face Space"
               allow="accelerometer; camera; microphone"
             />
-            {HF_SPACE_URL === "about:blank" && (
-              <div className="absolute inset-0 flex items-center justify-center bg-muted/60 backdrop-blur-sm">
-                <div className="text-center space-y-3">
-                  <div className="mx-auto h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-                    <Brain className="h-8 w-8 text-primary/40" />
-                  </div>
-                  <p className="text-sm font-semibold text-muted-foreground">Your ML Model will render here</p>
-                  <p className="text-xs text-muted-foreground/60">Set HF_SPACE_URL to your Hugging Face Space endpoint</p>
-                </div>
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>
