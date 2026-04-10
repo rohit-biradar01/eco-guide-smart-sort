@@ -88,7 +88,7 @@ We’d love to connect! Feel free to reach out to any of us on LinkedIn:
 - 👤 **Varad Patil**  
   🔗 https://www.linkedin.com/in/varad-patil-1442a0329
 
-  - 👤 **Sarthak Tilekar**
+- 👤 **Sarthak Tilekar**
   🔗 https://www.linkedin.com/in/sarthak-tilekar-8766a4334
 
 - 👤 **Teammate Name**  
