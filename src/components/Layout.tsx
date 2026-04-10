@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="h-8 w-8 rounded-lg bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/40">
                 <Recycle className="h-4 w-4 text-white" />
               </div>
-              <span className="font-bold text-sm font-heading gradient-text">EcoClean</span>
+              <span className="font-bold text-sm font-heading gradient-text">Project Eco</span>
             </div>
             <div className="flex-1 flex justify-center md:justify-start">
               <GlobalSearch />
