@@ -90,6 +90,9 @@ We’d love to connect! Feel free to reach out to any of us on LinkedIn:
 
 - 👤 **Teammate Name**  
   🔗 https://www.linkedin.com/in/teammate-profile
+
+- 👤 **Sarthak Tilekar**
+  🔗 https://www.linkedin.com/in/sarthak-tilekar-8766a4334
 ---
 
 ## 🛠️ Getting Started
