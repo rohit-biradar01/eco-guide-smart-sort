@@ -78,6 +78,20 @@ A central hub for all waste-related activities. Events are strictly color-coded 
 
 ---
 
+## 🤝 Connect with the Team
+
+We’d love to connect! Feel free to reach out to any of us on LinkedIn:
+
+- 👤 **Rohit Biradar**  
+  🔗 https://www.linkedin.com/in/your-profile
+
+- 👤 **Varad Patil**  
+  🔗 https://www.linkedin.com/in/varad-patil-1442a0329
+
+- 👤 **Teammate Name**  
+  🔗 https://www.linkedin.com/in/teammate-profile
+---
+
 ## 🛠️ Getting Started
 
 ### Prerequisites
