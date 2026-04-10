@@ -40,8 +40,8 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="p-4 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl gradient-primary shadow-md">
-            <Recycle className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-600 shadow-lg shadow-purple-500/40">
+            <Recycle className="h-5 w-5 text-white" />
           </div>
           {!collapsed && (
             <div className="flex flex-col">

@@ -30,8 +30,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <header className="h-14 flex items-center border-b bg-card/80 backdrop-blur-sm px-4 sticky top-0 z-30 gap-3">
             <SidebarTrigger className="mr-1 hidden md:flex" />
             <div className="flex items-center gap-2 md:hidden">
-              <div className="h-8 w-8 rounded-lg gradient-primary flex items-center justify-center">
-                <Recycle className="h-4 w-4 text-primary-foreground" />
+              <div className="h-8 w-8 rounded-lg bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/40">
+                <Recycle className="h-4 w-4 text-white" />
               </div>
               <span className="font-bold text-sm font-heading gradient-text">EcoClean</span>
             </div>
