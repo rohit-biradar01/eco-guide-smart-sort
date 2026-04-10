@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="h-8 w-8 rounded-lg gradient-primary flex items-center justify-center">
                 <Recycle className="h-4 w-4 text-primary-foreground" />
               </div>
-              <span className="font-bold text-sm gradient-text">EcoClean</span>
+              <span className="font-bold text-sm font-heading gradient-text">EcoClean</span>
             </div>
             <div className="flex-1 flex justify-center md:justify-start">
               <GlobalSearch />
@@ -44,7 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="h-9 w-9 rounded-full p-0">
                     <Avatar className="h-8 w-8 border border-primary/20">
-                      <AvatarFallback className="gradient-primary text-primary-foreground text-xs font-bold">
+                      <AvatarFallback className="gradient-primary text-primary-foreground text-xs font-bold font-heading">
                         {user.name.charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
@@ -52,7 +52,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   <div className="px-2 py-1.5">
-                    <p className="text-sm font-medium">{user.name}</p>
+                    <p className="text-sm font-medium font-heading">{user.name}</p>
                     <p className="text-xs text-muted-foreground">{user.email}</p>
                   </div>
                   <DropdownMenuSeparator />

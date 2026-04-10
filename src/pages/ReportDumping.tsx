@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { AlertTriangle, Upload, Send, Clock, CheckCircle, Loader2, Navigation, X, ImageIcon, Search as SearchIcon } from "lucide-react";
+import { AlertTriangle, Send, Clock, CheckCircle, Loader2, Navigation, X, ImageIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useCalendar } from "@/contexts/CalendarContext";
 
 interface Report {
   id: string;
@@ -19,9 +20,9 @@ interface Report {
 }
 
 const statusConfig = {
-  Received: { color: "bg-warning/15 text-warning border-warning/30", icon: Clock },
-  Investigating: { color: "bg-info/15 text-info border-info/30", icon: Loader2 },
-  Resolved: { color: "bg-success/15 text-success border-success/30", icon: CheckCircle },
+  Received: { color: "bg-eco-yellow/15 text-eco-yellow border-eco-yellow/30", icon: Clock },
+  Investigating: { color: "bg-eco-blue/15 text-eco-blue border-eco-blue/30", icon: Loader2 },
+  Resolved: { color: "bg-eco-green/15 text-eco-green border-eco-green/30", icon: CheckCircle },
 };
 
 export default function ReportDumping() {
@@ -34,6 +35,7 @@ export default function ReportDumping() {
   const [locating, setLocating] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const { addEvent } = useCalendar();
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -76,16 +78,25 @@ export default function ReportDumping() {
     if (!lat || !lng) { toast.error("Please capture your coordinates."); return; }
     setSubmitting(true);
     setTimeout(() => {
+      const reportDate = new Date();
       const newReport: Report = {
         id: crypto.randomUUID(),
         description: desc,
         status: "Received",
-        date: new Date().toISOString().split("T")[0],
+        date: reportDate.toISOString().split("T")[0],
         lat: parseFloat(lat),
         lng: parseFloat(lng),
         photo: photo?.name,
       };
       setReports(prev => [newReport, ...prev]);
+
+      // Sync to Calendar
+      addEvent({
+        date: reportDate,
+        type: "Dumping Report",
+        label: `Dumping: ${desc.slice(0, 40)}`,
+      });
+
       // Simulate status progression
       setTimeout(() => {
         setReports(prev => prev.map(r => r.id === newReport.id ? { ...r, status: "Investigating" } : r));
@@ -96,26 +107,26 @@ export default function ReportDumping() {
 
       setDesc(""); setPhoto(null); setPreview(null); setLat(""); setLng("");
       setSubmitting(false);
-      toast.success("Report submitted! Watch status updates below.");
+      toast.success("Report submitted & added to your Calendar!");
     }, 800);
   };
 
   return (
     <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-6 animate-fade-in">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <AlertTriangle className="h-6 w-6 text-warning" />
+        <h1 className="text-2xl font-bold font-heading flex items-center gap-2">
+          <AlertTriangle className="h-6 w-6 text-eco-red" />
           Report Illegal Dumping
         </h1>
-        <p className="text-sm text-muted-foreground">Submit GPS-tagged reports with photo evidence. Track resolution status in real-time.</p>
+        <p className="text-sm text-muted-foreground">Submit GPS-tagged reports with photo evidence. Reports sync to your Collection Calendar.</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         <Card className="glass-card">
-          <CardHeader><CardTitle className="text-sm">New Report</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-sm font-heading">New Report</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             {!preview ? (
-              <label className="flex flex-col items-center justify-center border-2 border-dashed border-warning/30 rounded-xl p-5 cursor-pointer hover:border-warning/60 hover:bg-warning/5 transition-all">
+              <label className="flex flex-col items-center justify-center border-2 border-dashed border-eco-red/30 rounded-xl p-5 cursor-pointer hover:border-eco-red/60 hover:bg-eco-red/5 transition-all">
                 <ImageIcon className="h-7 w-7 text-muted-foreground mb-1" />
                 <span className="text-sm text-muted-foreground">Upload evidence photo</span>
                 <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFileSelect} />
@@ -150,7 +161,7 @@ export default function ReportDumping() {
         </Card>
 
         <div className="space-y-3">
-          <h2 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Live Status Tracking</h2>
+          <h2 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider font-heading">Live Status Tracking</h2>
           {reports.length === 0 ? (
             <Card className="glass-card">
               <CardContent className="p-8 text-center text-sm text-muted-foreground">

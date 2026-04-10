@@ -6,7 +6,10 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --background: 40 20% 98%;
     --foreground: 220 20% 14%;
 
     --card: 0 0% 100%;
@@ -30,8 +33,8 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --warning: 25 95% 53%;
-    --warning-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 0 0% 10%;
 
     --success: 152 69% 40%;
     --success-foreground: 0 0% 100%;
@@ -44,6 +47,18 @@
 
     --purple: 262 83% 58%;
     --purple-foreground: 0 0% 100%;
+
+    --eco-blue: 210 100% 56%;
+    --eco-blue-foreground: 0 0% 100%;
+
+    --eco-yellow: 45 93% 47%;
+    --eco-yellow-foreground: 0 0% 10%;
+
+    --eco-red: 0 84% 60%;
+    --eco-red-foreground: 0 0% 100%;
+
+    --eco-green: 152 69% 40%;
+    --eco-green-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
@@ -59,11 +74,12 @@
     --sidebar-border: 220 18% 16%;
     --sidebar-ring: 160 84% 44%;
 
-    --chart-green: 160 84% 39%;
+    --chart-green: 152 69% 40%;
     --chart-amber: 25 95% 53%;
-    --chart-blue: 199 89% 48%;
+    --chart-blue: 210 100% 56%;
     --chart-red: 0 84% 60%;
     --chart-purple: 262 83% 58%;
+    --chart-yellow: 45 93% 47%;
     --chart-slate: 220 15% 60%;
 
     --gradient-start: 160 84% 39%;
@@ -87,6 +103,16 @@
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
+    --warning: 45 85% 50%;
+    --warning-foreground: 0 0% 10%;
+    --eco-blue: 210 90% 50%;
+    --eco-blue-foreground: 0 0% 100%;
+    --eco-yellow: 45 85% 50%;
+    --eco-yellow-foreground: 0 0% 10%;
+    --eco-red: 0 72% 50%;
+    --eco-red-foreground: 0 0% 100%;
+    --eco-green: 152 60% 42%;
+    --eco-green-foreground: 0 0% 100%;
     --border: 220 14% 16%;
     --input: 220 14% 16%;
     --ring: 160 74% 44%;
@@ -107,6 +133,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
   }
 }
 
@@ -122,5 +152,14 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+  .gradient-multi {
+    background: linear-gradient(135deg, hsl(var(--eco-green)), hsl(var(--eco-blue)), hsl(var(--eco-yellow)));
+  }
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-body {
+    font-family: var(--font-body);
   }
 }
