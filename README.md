@@ -97,9 +97,8 @@ We’d love to connect! Feel free to reach out to any of us on LinkedIn:
 - 👤 **Aryan Kumawat**  
   🔗 https://www.linkedin.com/in/aryan-kumawat-220950380
 
-- 👤 **Teammate Name**  
-  🔗 https://www.linkedin.com/in/teammate-profile
----
+- 👤 **Sarthak Srivastava**  
+  🔗 https://www.linkedin.com/in/sarthak-srivastava-0b5743374
 
 ## 🛠️ Getting Started
 
