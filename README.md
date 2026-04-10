@@ -91,7 +91,7 @@ We’d love to connect! Feel free to reach out to any of us on LinkedIn:
 - 👤 **Sharmee Das**  
   🔗 https://www.linkedin.com/in/sharmee-das-b18627331/
 
-- 👤 **Sarthak Tilekar**
+- 👤 **Sarthak Tilekar** 
   🔗 https://www.linkedin.com/in/sarthak-tilekar-8766a4334
 
 - 👤 **Aryan Kumawat**  
