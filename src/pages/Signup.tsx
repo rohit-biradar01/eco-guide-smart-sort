@@ -32,8 +32,8 @@ export default function Signup() {
     }
     try {
       await signup(name, email, password);
-      toast.success("Account created! Please check your email to verify.");
-      navigate("/login");
+      toast.success("Account created! Welcome to Project Eco.");
+      navigate("/dashboard");
     } catch {
       toast.error("Signup failed.");
     }
