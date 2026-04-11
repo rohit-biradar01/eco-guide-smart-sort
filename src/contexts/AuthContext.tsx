@@ -1,4 +1,6 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import type { User, Session } from "@supabase/supabase-js";
 
 export interface UserProfile {
   id: string;
@@ -25,48 +27,82 @@ interface AuthContextType extends AuthState {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+function mapUser(user: User): UserProfile {
+  return {
+    id: user.id,
+    name: user.user_metadata?.name || user.email?.split("@")[0] || "",
+    email: user.email || "",
+    address: "",
+    createdAt: user.created_at,
+  };
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AuthState>({
     user: null,
     isAuthenticated: false,
-    isLoading: false,
+    isLoading: true,
   });
 
-  const login = useCallback(async (email: string, _password: string) => {
-    setState(s => ({ ...s, isLoading: true }));
-    // TODO: Replace with Supabase auth.signInWithPassword
-    await new Promise(r => setTimeout(r, 600));
-    setState({
-      isLoading: false,
-      isAuthenticated: true,
-      user: {
-        id: crypto.randomUUID(),
-        name: email.split("@")[0],
-        email,
-        address: "",
-        createdAt: new Date().toISOString(),
-      },
+  useEffect(() => {
+    // Listen for auth changes FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (_event, session) => {
+        if (session?.user) {
+          setState({
+            user: mapUser(session.user),
+            isAuthenticated: true,
+            isLoading: false,
+          });
+        } else {
+          setState({ user: null, isAuthenticated: false, isLoading: false });
+        }
+      }
+    );
+
+    // Then check existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        setState({
+          user: mapUser(session.user),
+          isAuthenticated: true,
+          isLoading: false,
+        });
+      } else {
+        setState({ user: null, isAuthenticated: false, isLoading: false });
+      }
     });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const signup = useCallback(async (name: string, email: string, _password: string) => {
+  const login = useCallback(async (email: string, password: string) => {
     setState(s => ({ ...s, isLoading: true }));
-    // TODO: Replace with Supabase auth.signUp
-    await new Promise(r => setTimeout(r, 600));
-    setState({
-      isLoading: false,
-      isAuthenticated: true,
-      user: {
-        id: crypto.randomUUID(),
-        name,
-        email,
-        address: "",
-        createdAt: new Date().toISOString(),
-      },
-    });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      setState(s => ({ ...s, isLoading: false }));
+      throw error;
+    }
   }, []);
 
-  const logout = useCallback(() => {
+  const signup = useCallback(async (name: string, email: string, password: string) => {
+    setState(s => ({ ...s, isLoading: true }));
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { name },
+        emailRedirectTo: window.location.origin,
+      },
+    });
+    if (error) {
+      setState(s => ({ ...s, isLoading: false }));
+      throw error;
+    }
+  }, []);
+
+  const logout = useCallback(async () => {
+    await supabase.auth.signOut();
     setState({ user: null, isAuthenticated: false, isLoading: false });
   }, []);
 
@@ -78,7 +114,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const deleteAccount = useCallback(() => {
-    // TODO: Replace with Supabase auth.admin.deleteUser or RPC
     setState({ user: null, isAuthenticated: false, isLoading: false });
   }, []);
 
