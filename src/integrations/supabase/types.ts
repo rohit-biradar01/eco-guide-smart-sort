@@ -14,7 +14,240 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bulky_pickups: {
+        Row: {
+          address: string
+          category: string
+          created_at: string
+          id: string
+          item_description: string | null
+          name: string
+          notes: string | null
+          phone: string
+          pickup_date: string
+          status: string
+          time_slot: string
+          user_id: string
+        }
+        Insert: {
+          address: string
+          category: string
+          created_at?: string
+          id?: string
+          item_description?: string | null
+          name: string
+          notes?: string | null
+          phone: string
+          pickup_date: string
+          status?: string
+          time_slot: string
+          user_id: string
+        }
+        Update: {
+          address?: string
+          category?: string
+          created_at?: string
+          id?: string
+          item_description?: string | null
+          name?: string
+          notes?: string | null
+          phone?: string
+          pickup_date?: string
+          status?: string
+          time_slot?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      calendar_events: {
+        Row: {
+          created_at: string
+          event_date: string
+          event_type: string
+          id: string
+          label: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_date: string
+          event_type: string
+          id?: string
+          label: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_date?: string
+          event_type?: string
+          id?: string
+          label?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      classifications: {
+        Row: {
+          bin_color: string | null
+          category: string
+          classification_type: string
+          confidence: number | null
+          created_at: string
+          id: string
+          instructions: string | null
+          query_text: string | null
+          segmented_image_url: string | null
+          user_id: string
+        }
+        Insert: {
+          bin_color?: string | null
+          category: string
+          classification_type?: string
+          confidence?: number | null
+          created_at?: string
+          id?: string
+          instructions?: string | null
+          query_text?: string | null
+          segmented_image_url?: string | null
+          user_id: string
+        }
+        Update: {
+          bin_color?: string | null
+          category?: string
+          classification_type?: string
+          confidence?: number | null
+          created_at?: string
+          id?: string
+          instructions?: string | null
+          query_text?: string | null
+          segmented_image_url?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      dumping_reports: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          latitude: number
+          longitude: number
+          photo_url: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          latitude: number
+          longitude: number
+          photo_url?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          latitude?: number
+          longitude?: number
+          photo_url?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          address: string
+          avatar_url: string | null
+          created_at: string
+          email: string
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address?: string
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      scrap_estimations: {
+        Row: {
+          created_at: string
+          id: string
+          result_text: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          result_text: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          result_text?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      waste_entries: {
+        Row: {
+          created_at: string
+          day_label: string
+          generated_kg: number
+          id: string
+          recycled_kg: number
+          updated_at: string
+          user_id: string
+          week_start: string
+        }
+        Insert: {
+          created_at?: string
+          day_label: string
+          generated_kg?: number
+          id?: string
+          recycled_kg?: number
+          updated_at?: string
+          user_id: string
+          week_start?: string
+        }
+        Update: {
+          created_at?: string
+          day_label?: string
+          generated_kg?: number
+          id?: string
+          recycled_kg?: number
+          updated_at?: string
+          user_id?: string
+          week_start?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

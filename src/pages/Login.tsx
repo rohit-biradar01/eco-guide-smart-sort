@@ -23,7 +23,7 @@ export default function Login() {
     try {
       await login(email, password);
       toast.success("Welcome back!");
-      navigate("/");
+      navigate("/dashboard");
     } catch {
       toast.error("Login failed.");
     }
@@ -37,7 +37,7 @@ export default function Login() {
             <Recycle className="h-7 w-7 text-white" />
           </div>
           <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
-          <CardDescription>Sign in to your EcoClean dashboard</CardDescription>
+          <CardDescription>Sign in to your Project Eco dashboard</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
