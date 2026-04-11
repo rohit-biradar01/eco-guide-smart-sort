@@ -32,8 +32,8 @@ export default function Signup() {
     }
     try {
       await signup(name, email, password);
-      toast.success("Account created! Welcome to EcoClean.");
-      navigate("/");
+      toast.success("Account created! Please check your email to verify.");
+      navigate("/login");
     } catch {
       toast.error("Signup failed.");
     }
@@ -47,7 +47,7 @@ export default function Signup() {
             <Recycle className="h-7 w-7 text-white" />
           </div>
           <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
-          <CardDescription>Join EcoClean and start managing waste smarter</CardDescription>
+          <CardDescription>Join Project Eco and start managing waste smarter</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
