@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 const navItems = [
-  { title: "AI Classifier", url: "/", icon: Brain, color: "text-eco-green" },
+  { title: "AI Classifier", url: "/dashboard", icon: Brain, color: "text-eco-green" },
   { title: "Facility Locator", url: "/facilities", icon: MapPin, color: "text-eco-blue" },
   { title: "Collection Schedule", url: "/schedule", icon: Calendar, color: "text-eco-blue" },
   { title: "Report Dumping", url: "/report", icon: AlertTriangle, color: "text-eco-red" },
