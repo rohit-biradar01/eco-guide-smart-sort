@@ -2,7 +2,7 @@ import { Brain, MapPin, Calendar, AlertTriangle, BarChart3 } from "lucide-react"
 import { NavLink } from "@/components/NavLink";
 
 const tabs = [
-  { icon: Brain, label: "Classify", path: "/" },
+  { icon: Brain, label: "Classify", path: "/dashboard" },
   { icon: MapPin, label: "Locate", path: "/facilities" },
   { icon: Calendar, label: "Schedule", path: "/schedule" },
   { icon: AlertTriangle, label: "Report", path: "/report" },
