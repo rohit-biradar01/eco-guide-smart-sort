@@ -42,15 +42,11 @@ export default function ImageClassificationCard({ onResult, onLoadingChange }: P
     toast.info("Analyzing image with ML model...");
 
     try {
-      const { Client, handle_file } = await import("@gradio/client");
+      const { Client } = await import("@gradio/client");
       const app = await Client.connect("sharmeeDas/OurWasteSegregator");
 
-      // Convert file to a blob URL for handle_file
-      const blob = new Blob([await file.arrayBuffer()], { type: file.type });
-      const blobUrl = URL.createObjectURL(blob);
-
-      const result = await app.predict("/predict", [handle_file(blobUrl)]);
-      URL.revokeObjectURL(blobUrl);
+      // Pass the raw File (which is a Blob) directly
+      const result = await app.predict("/predict_trash", { image: file });
 
       const data = result.data as any[];
       // Gradio typically returns [image_output, text_output]
